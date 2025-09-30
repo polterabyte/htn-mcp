@@ -3,7 +3,7 @@ import json
 import uuid
 
 # Согласно docker-compose.yml, Orchestrator доступен на порту 8080
-ORCHESTRATOR_URL = "http://localhost:8080/api/v1/goals"
+ORCHESTRATOR_URL = "http://localhost:8080/api/v1/goals/"
 
 def submit_hello_world_goal():
     """
