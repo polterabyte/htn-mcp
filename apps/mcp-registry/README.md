@@ -50,5 +50,4 @@ uvicorn mcp_registry.main:app --reload --port 8081
 ## TODO
 - Добавить хранилище (Postgres) и CRUD для серверов/инструментов.
 - Реализовать health‑пинги и автоматическое закрытие circuit breaker.
-- Подключить аутентификацию (админская зона) и RBAC.
 - Написать документацию по формату регистрации (`docs/design/TOOLS.md`).
