@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orchestrator
+spec:
+  replicas: {{ .Values.replicaCount.orchestrator }}
+  selector:
+    matchLabels: { app: orchestrator }
+  template:
+    metadata:
+      labels: { app: orchestrator }
+    spec:
+      containers:
+        - name: orchestrator
+          image: {{ .Values.image.orchestrator }}
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DATABASE_URL
+              value: {{ .Values.env.databaseUrl | quote }}
+            - name: REDIS_URL
+              value: {{ .Values.env.redisUrl | quote }}
+            - name: NATS_URL
+              value: {{ .Values.env.natsUrl | quote }}
+            - name: S3_ENDPOINT
+              value: {{ .Values.env.s3Endpoint | quote }}
+            - name: S3_ACCESS_KEY
+              value: {{ .Values.env.s3AccessKey | quote }}
+            - name: S3_SECRET_KEY
+              value: {{ .Values.env.s3SecretKey | quote }}
+            - name: S3_BUCKET
+              value: {{ .Values.env.s3Bucket | quote }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: orchestrator
+spec:
+  selector: { app: orchestrator }
+  ports:
+    - port: 80
+      targetPort: 8080

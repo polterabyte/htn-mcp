@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MCP Policy",
+  "type": "object",
+  "properties": {
+    "allow": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "deny": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "transport": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "stdio",
+          "http"
+        ]
+      }
+    },
+    "timeouts": {
+      "type": "object",
+      "properties": {
+        "connect_ms": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "call_ms": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "retries": {
+      "type": "object",
+      "properties": {
+        "max": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "backoff_ms": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "concurrency": {
+      "type": "integer",
+      "minimum": 1
+    }
+  }
+}

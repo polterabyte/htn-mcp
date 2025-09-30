@@ -1,0 +1,36 @@
+{
+  "title": "HTN \u2014 MCP Calls",
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "MCP p95",
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.95, sum by (le,server,tool) (rate(mcp_call_duration_seconds_bucket[5m])))"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "MCP errors",
+      "targets": [
+        {
+          "expr": "sum(rate(mcp_calls_total{status=\"error\"}[5m])) by (server,tool)"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "MCP QPS",
+      "targets": [
+        {
+          "expr": "sum(rate(mcp_calls_total[1m])) by (server,tool,status)"
+        }
+      ]
+    }
+  ],
+  "time": {
+    "from": "now-15m",
+    "to": "now"
+  }
+}

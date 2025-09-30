@@ -1,0 +1,30 @@
+{
+  "title": "HTN \u2014 NATS/JetStream",
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "Connections",
+      "targets": [
+        {
+          "expr": "gnatsd_connections"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Bytes rate",
+      "targets": [
+        {
+          "expr": "rate(gnatsd_in_bytes[1m])"
+        },
+        {
+          "expr": "rate(gnatsd_out_bytes[1m])"
+        }
+      ]
+    }
+  ],
+  "time": {
+    "from": "now-15m",
+    "to": "now"
+  }
+}

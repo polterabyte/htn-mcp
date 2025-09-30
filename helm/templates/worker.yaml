@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker-{{ .Values.role }}
+spec:
+  replicas: {{ .Values.replicaCount.executor }}
+  selector:
+    matchLabels: { app: "worker-{{ .Values.role }}" }
+  template:
+    metadata:
+      labels: { app: "worker-{{ .Values.role }}" }
+    spec:
+      containers:
+        - name: worker
+          image: {{ .Values.image.worker }}
+          env:
+            - name: ROLE
+              value: {{ .Values.role | upper | quote }}
+            - name: DATABASE_URL
+              value: {{ .Values.env.databaseUrl | quote }}
+            - name: REDIS_URL
+              value: {{ .Values.env.redisUrl | quote }}
+            - name: NATS_URL
+              value: {{ .Values.env.natsUrl | quote }}

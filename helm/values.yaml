@@ -1,0 +1,19 @@
+image:
+  orchestrator: ghcr.io/example/htn-orchestrator:latest
+  worker: ghcr.io/example/htn-worker:latest
+
+replicaCount:
+  orchestrator: 1
+  analyst: 1
+  executor: 2
+  verifier: 1
+  coordinator: 1
+
+env:
+  databaseUrl: postgresql://postgres:postgres@postgres:5432/orchestrator
+  redisUrl: redis://redis:6379/0
+  natsUrl: nats://nats:4222
+  s3Endpoint: http://minio:9000
+  s3AccessKey: minio
+  s3SecretKey: minio123
+  s3Bucket: artifacts

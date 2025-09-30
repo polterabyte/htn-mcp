@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Contract",
+  "type": "object",
+  "required": [
+    "id",
+    "goal",
+    "role",
+    "sla",
+    "deliverables",
+    "blackboard_caps"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "parent_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "goal": {
+      "type": "object",
+      "required": [
+        "name",
+        "params"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "params": {
+          "type": "object"
+        }
+      }
+    },
+    "role": {
+      "enum": [
+        "Analyst",
+        "Executor",
+        "Verifier",
+        "Coordinator"
+      ]
+    },
+    "sla": {
+      "type": "object",
+      "required": [
+        "budget",
+        "deadline",
+        "depth"
+      ],
+      "properties": {
+        "budget": {
+          "type": "number",
+          "minimum": 0
+        },
+        "deadline": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "depth": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "helpers_max": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "deliverables": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "verify": {
+      "type": "object",
+      "properties": {
+        "predicate": {
+          "type": "string"
+        },
+        "invariants": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "blackboard_caps": {
+      "type": "object",
+      "required": [
+        "read",
+        "write"
+      ],
+      "properties": {
+        "read": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "write": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "mcp_policy": {
+      "$ref": "mcp_policy.schema.json"
+    },
+    "retries": {
+      "type": "object",
+      "properties": {
+        "max": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "backoff_ms": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "on_fail": {
+      "type": "object",
+      "properties": {
+        "escalate": {
+          "type": "boolean"
+        },
+        "emit": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+groups:
+- name: htn-alerts
+  rules:
+  - alert: HighMCPErrors
+    expr: sum(rate(mcp_calls_total{status="error"}[5m])) > 0.5
+    for: 2m
+    labels:
+      severity: warning
+    annotations:
+      summary: "Высокая ошибка MCP"
+      description: "Ошибка MCP более 0.5 rps за последние 5 минут."

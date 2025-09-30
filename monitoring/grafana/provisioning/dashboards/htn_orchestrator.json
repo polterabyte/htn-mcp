@@ -1,0 +1,18 @@
+{
+  "title": "HTN System \u2014 Orchestrator",
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "HTTP requests",
+      "targets": [
+        {
+          "expr": "sum(rate(http_requests_total[1m])) by (method)"
+        }
+      ]
+    }
+  ],
+  "time": {
+    "from": "now-15m",
+    "to": "now"
+  }
+}
